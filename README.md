@@ -71,17 +71,5 @@ Error tests: duplicate ID (409), price -5 (400), rating 9 (400), id=abc (400), d
 - **findMin / findMax**: go all the way left / right (smallest / largest ID). Min/max price uses traversal.
 - Sample tree (insert order 105,101,120,100,103,115,150,110,118,160) has root 105 and height 4.
 
-## 9. Viva questions
-1. **Why BST for product search?** Each comparison discards half the remaining tree on average, so search is O(log n) instead of O(n) for a list.
-2. **What is the key?** Product ID, because it is unique and ordered.
-3. **Why is name search slow?** The tree is ordered by ID, so name matches can be anywhere. We visit all nodes, O(n). A second BST keyed by name would fix this.
-4. **Worst case?** Inserting sorted IDs makes a skewed tree (like a linked list), height n, so O(n).
-5. **How to fix it?** Self-balancing trees: AVL or Red-Black tree.
-6. **Delete with two children?** Replace with inorder successor (or predecessor), then delete that node.
-7. **Which traversal gives sorted output?** Inorder.
-8. **Why can't price range prune the tree?** Price is not the key, so subtrees are not ordered by price.
-9. **Duplicates?** Rejected with HTTP 409.
-10. **Inorder successor?** The smallest node in the right subtree.
-
-## 10. Possible improvements
+## 9. Possible improvements
 AVL balancing with rotation animation, a second BST by name, save and load products from a file, edit product, login for admin, pagination, unit tests.
