@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BST Store</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="hero">
+  <nav class="nav">
+    <div class="logo">🌳 BST Store</div>
+    <form id="searchForm" class="searchbar">
+      <input id="searchInput" placeholder="Search by Product ID (120) or name (laptop)" autocomplete="off">
+      <button type="submit">Search</button>
+    </form>
+    <button id="themeBtn" class="icon-btn" title="Toggle dark/light">🌙</button>
+  </nav>
+  <div class="hero-text">
+    <h1>Online Store Product Search</h1>
+    <p>Binary Search Tree in C++ · BST key = Product ID · <span id="countBadge">0</span> products</p>
+  </div>
+</header>
+
+<main>
+  <section id="stats" class="stats"></section>
+
+  <section>
+    <h2>Search Result</h2>
+    <div id="searchInfo" class="panel muted">Search a product to see the BST search path.</div>
+    <div id="results" class="grid"></div>
+  </section>
+
+  <section>
+    <h2>All Products <small>(inorder traversal, sorted by ID)</small></h2>
+    <div id="chips" class="chips"></div>
+    <div id="grid" class="grid"></div>
+  </section>
+
+  <section class="two">
+    <div class="panel">
+      <h2>Add Product (Insert)</h2>
+      <form id="addForm" class="form">
+        <input name="id" type="number" placeholder="Product ID" required>
+        <input name="name" placeholder="Product name" required>
+        <input name="category" placeholder="Category" required>
+        <input name="price" type="number" step="0.01" placeholder="Price" required>
+        <input name="quantity" type="number" placeholder="Quantity" required>
+        <input name="rating" type="number" step="0.1" placeholder="Rating (0-5)" required>
+        <button type="submit">Insert into BST</button>
+      </form>
+    </div>
+    <div class="panel">
+      <h2>Delete Product</h2>
+      <form id="delForm" class="form">
+        <input id="delId" type="number" placeholder="Product ID" required>
+        <button type="submit" class="danger">Delete from BST</button>
+      </form>
+      <h2 style="margin-top:24px">Price Range</h2>
+      <form id="rangeForm" class="form">
+        <input id="minP" type="number" placeholder="Min price" required>
+        <input id="maxP" type="number" placeholder="Max price" required>
+        <button type="submit">Find in range</button>
+      </form>
+    </div>
+  </section>
+
+  <section>
+    <h2>Binary Search Tree Visualization</h2>
+    <div class="legend"><span class="dot visited"></span>Visited <span class="dot found"></span>Found <span class="dot new"></span>Inserted</div>
+    <div id="treeBox" class="panel treebox"></div>
+  </section>
+
+  <section class="panel info">
+    <h2>Algorithm Information</h2>
+    <h3>What is a Binary Search Tree?</h3>
+    <p>A tree where each node has at most two children. Left subtree holds smaller keys, right subtree holds larger keys. Here the key is the <b>Product ID</b>.</p>
+    <h3>Insertion</h3><p>Start at the root, go left if the new ID is smaller, right if larger, and attach the new node at the first empty position. Duplicates are rejected.</p>
+    <h3>Searching</h3><p>Compare with the current node: equal means found, smaller means go left, larger means go right. Each step discards one subtree. Searching by name must visit every node because the tree is ordered by ID, not name.</p>
+    <h3>Deletion</h3><p>Leaf: remove it. One child: replace the node with its child. Two children: copy the inorder successor (smallest node of the right subtree) into the node, then delete the successor.</p>
+    <h3>Inorder Traversal</h3><p>Left → Node → Right. For a BST this visits products in sorted Product ID order.</p>
+    <h3>Time Complexity</h3>
+    <table>
+      <tr><th></th><th>Average</th><th>Worst case</th></tr>
+      <tr><td>Search</td><td>O(log n)</td><td>O(n)</td></tr>
+      <tr><td>Insert</td><td>O(log n)</td><td>O(n)</td></tr>
+      <tr><td>Delete</td><td>O(log n)</td><td>O(n)</td></tr>
+    </table>
+    <p><b>Why O(n)?</b> If IDs are inserted in sorted order (101, 102, 103...), every node goes to the right and the tree becomes a linked list of height n. Each operation then walks through all nodes. Balanced trees (AVL, Red-Black) fix this. Try it: add IDs 161, 162, 163, 164 and watch the height grow.</p>
+  </section>
+</main>
+<div id="toast" class="toast"></div>
+<footer>BST Store · Data Structures Mini Project</footer>
+<script src="script.js"></script>
+</body>
+</html>
